@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:layout_gravity="center"
+    android:id="@+id/main_frame">
+
+    <TextView
+        android:id="@+id/personal_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:text="Delete student?"
+        android:layout_centerHorizontal="true"/>
+
+    <RelativeLayout
+        android:id="@+id/call_board"
+        android:layout_below="@+id/personal_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="#ffffff">
+
+        <TextView
+            android:id="@+id/viewMiddleInvisible"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"/>
+
+        <Button
+            android:id="@+id/yes"
+            android:text="Yes"
+            android:background="@drawable/personal_main_round_button"
+            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/viewMiddleInvisible"
+            android:layout_marginRight="5dp"/>
+
+        <Button
+            android:id="@+id/no"
+            android:text="No"
+            android:background="@drawable/personal_main_round_button"
+            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/viewMiddleInvisible"
+            android:layout_marginLeft="5dp"/>
+
+    </RelativeLayout>
+</RelativeLayout>

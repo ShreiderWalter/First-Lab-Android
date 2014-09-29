@@ -22,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.walter.firstlab.core.Student;
+import com.example.walter.firstlab.database.DatabaseHandler;
 import com.example.walter.firstlab.dialogs.CallDialog;
 
 import java.util.ArrayList;
@@ -33,12 +34,13 @@ import java.util.Arrays;
 public class CallActivity extends Activity {
     private TextView labCaller, labelName;
     private EditText fieldName;
-    private Button find;
+    private Button find, buttonList;
     private AlphaAnimation animation;
     private ArrayList<Student> list;
     private ArrayList<Student> matchedList;
     private ObjectAnimator animY;
     private CallDialog callDialog;
+    private DatabaseHandler databaseHandler;
 
     private SharedPreferences sharedPreferences;
 
@@ -52,6 +54,7 @@ public class CallActivity extends Activity {
         labelName = (TextView) findViewById(R.id.label_name);
         fieldName = (EditText) findViewById(R.id.field_name);
         find = (Button) findViewById(R.id.find_student);
+        buttonList = (Button) findViewById(R.id.all_students);
 
         Display currentDisplay = getWindowManager().getDefaultDisplay();
         Point size = new Point();
@@ -73,9 +76,15 @@ public class CallActivity extends Activity {
         animation.setDuration(3500);
         labCaller.setAnimation(animation);
         find.setTextSize(TypedValue.COMPLEX_UNIT_SP, size.y / 50);
+        buttonList.setTextSize(TypedValue.COMPLEX_UNIT_SP, size.y / 50);
 
         Bundle b = getIntent().getExtras();
         list = b.getParcelableArrayList("Students");
+        databaseHandler = new DatabaseHandler(this);
+        for(Student student : list){
+            databaseHandler.addStudent(student);
+        }
+        list = (ArrayList) databaseHandler.getAllStudents();
 
         find.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,6 +107,19 @@ public class CallActivity extends Activity {
                 }
             }
         });
+
+        buttonList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                animY = ObjectAnimator.ofFloat(buttonList, "translationY", -100f, 0f);
+                animY.setDuration(1500);
+                animY.setInterpolator(new BounceInterpolator());
+                animY.setRepeatCount(0);
+                animY.start();
+                callDialog = new CallDialog(CallActivity.this, list);
+                callDialog.show();
+            }
+        });
     }
 
     private boolean ifFound(String name){
@@ -109,4 +131,5 @@ public class CallActivity extends Activity {
         }
         return matchedList.size() != 0;
     }
+
 }

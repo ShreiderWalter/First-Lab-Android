@@ -11,6 +11,7 @@ import android.os.SystemClock;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Display;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -136,10 +137,18 @@ public class MainActivity extends Activity {
                     @Override
                     public void run() {
                         startActivity(goIntent);
-                        finish();
+                        //finish();
                     }
                 }, 1700);
             }
         });
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        switch (keyCode){
+            case KeyEvent.KEYCODE_BACK : finish(); break;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

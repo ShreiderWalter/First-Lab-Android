@@ -8,6 +8,7 @@ import android.os.Parcelable;
  */
 public class Student implements Parcelable{
     private String name, mail, phoneNumber;
+    private Integer id;
 
     public Student(){}
 
@@ -19,6 +20,13 @@ public class Student implements Parcelable{
         this.name = name;
         this.mail = mail;
         this.phoneNumber = phoneNumber;
+    }
+
+    public Student(Integer id, String name, String mail, String phoneNumber){
+        this.name = name;
+        this.mail = mail;
+        this.phoneNumber = phoneNumber;
+        this.id = id;
     }
 
     @Override
@@ -73,6 +81,14 @@ public class Student implements Parcelable{
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     @Override
